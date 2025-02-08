@@ -19,6 +19,7 @@ import {
   IconButton,
   useColorMode,
   Tooltip,
+  useToast,
 } from '@chakra-ui/react';
 import { FaEnvelope, FaLock, FaGoogle, FaFacebook, FaSun, FaMoon } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
@@ -32,12 +33,30 @@ export default function Signup() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
+  const toast = useToast();
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (password !== confirmPassword) {
-      console.error('Passwords do not match');
+      toast({
+        title: 'Password Mismatch',
+        description: 'Passwords do not match. Please try again.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    if (password.length < 6) {
+      toast({
+        title: 'Invalid Password',
+        description: 'Password must be at least 6 characters long.',
+        status: 'warning',
+        duration: 3000,
+        isClosable: true,
+      });
       return;
     }
 
@@ -48,9 +67,38 @@ export default function Signup() {
         email,
         password,
       });
-      navigate('/login');
-    } catch (error) {
-      console.error('Signup failed:', error);
+      
+      toast({
+        title: 'Account Created',
+        description: 'Your account has been successfully created! Redirecting to login...',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+      
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.detail || 'An error occurred during signup';
+      
+      if (errorMessage.includes('already registered')) {
+        toast({
+          title: 'Account Exists',
+          description: 'This email is already registered. Please try logging in.',
+          status: 'error',
+          duration: 4000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: 'Signup Failed',
+          description: errorMessage,
+          status: 'error',
+          duration: 4000,
+          isClosable: true,
+        });
+      }
     } finally {
       setIsLoading(false);
     }
