@@ -21,7 +21,7 @@ import {
   useColorMode,
   Tooltip,
 } from '@chakra-ui/react';
-import { FaEnvelope, FaLock, FaGoogle, FaFacebook, FaSun, FaMoon } from 'react-icons/fa';
+import { FaEnvelope, FaLock, FaGoogle, FaFacebook, FaSun, FaMoon, FaLinkedin } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { LoginCredentials, AuthResponse } from '../types/auth';
@@ -238,6 +238,46 @@ export default function Login() {
               >
                 AWS Resource Viewer
               </Text>
+              <Flex
+                direction="column"
+                align="center"
+                mt={6}
+                borderTop="1px solid"
+                borderColor={colorMode === 'light' ? 'blue.200' : 'blue.700'}
+                pt={4}
+              >
+                <Text
+                  fontSize="md"
+                  fontWeight="medium"
+                  color={colorMode === 'light' ? 'blue.600' : 'blue.200'}
+                  mb={2}
+                >
+                  Designed by Sourabh Dey
+                </Text>
+                <ChakraLink
+                  href="https://www.linkedin.com/in/sourabh-dey-049a22204/"
+                  isExternal
+                  _hover={{ transform: 'translateY(-2px)' }}
+                  transition="all 0.2s"
+                >
+                  <IconButton
+                    aria-label="LinkedIn Profile"
+                    icon={<FaLinkedin size={24} />}
+                    size="lg"
+                    colorScheme="linkedin"
+                    variant="solid"
+                    borderRadius="full"
+                    boxShadow="0 0 10px rgba(0, 119, 181, 0.5)"
+                    _hover={{
+                      transform: 'scale(1.1)',
+                      boxShadow: '0 0 15px rgba(0, 119, 181, 0.8)'
+                    }}
+                    bg="linkedin.500"
+                    color="white"
+                    p={3}
+                  />
+                </ChakraLink>
+              </Flex>
             </Box>
           </Flex>
         </Flex>
