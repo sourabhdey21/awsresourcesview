@@ -20,8 +20,6 @@ sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-
-
 ## Run the application
 
 ```bash
@@ -32,8 +30,18 @@ docker-compose up --build
 
 ```bash
 http://localhost:80
-
 ```
+
+---
+
+## Designed & Developed by
+
+<div align="center">
+  <h3>Sourabh Dey</h3>
+  <a href="https://www.linkedin.com/in/sourabh-dey-049a22204/" target="_blank">
+    <img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="LinkedIn" height="30" width="40" />
+  </a>
+</div>
 
 
 
